@@ -23,7 +23,7 @@ const TopValueCompanies = ({ context, runServerless }) => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const companiesBatchSize = 30;
-  const companiesToDisplay = 3;
+  const companiesToDisplay = 10;
 
   const executeServerless = async () => {
     setLoading(true);
