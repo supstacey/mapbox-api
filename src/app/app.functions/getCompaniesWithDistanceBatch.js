@@ -29,7 +29,7 @@ exports.main = async (context = {}) => {
   const { batchSize } = context.event.payload;
   let otherCompanies = await getOtherCompaniesBatch({
     hubspotClient: new hubspot.Client({
-      accessToken: process.env['PRIVATE_APP_ACCESS_TOKEN'],
+      accessToken: process.env.hsautomation,
     }),
     batchSize,
     currentCompany,
@@ -112,7 +112,7 @@ async function getGeoCoordinates({ address }) {
   // Use Mapbox Geocoding API
   // See https://docs.mapbox.com/api/search/geocoding/
   const mapboxClient = MapboxClient({
-    accessToken: process.env.MAPBOX_ACCESS_TOKEN,
+    accessToken: process.env.mapbox,
   });
   // Use JS SDK for working with Mapbox APIs: https://www.npmjs.com/package/@mapbox/mapbox-sdk
   const response = await mapboxClient.forwardGeocode({ query: address }).send();
