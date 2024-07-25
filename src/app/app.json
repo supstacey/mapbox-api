@@ -1,6 +1,6 @@
 {
   "name": "Coffee and Tears",
-  "description": "View nearby companies: Mapbox API",
+  "description": "Coffee and Tears",
   "uid": "view_nearby_companies_app",
   "scopes": [
     "crm.objects.companies.write",
