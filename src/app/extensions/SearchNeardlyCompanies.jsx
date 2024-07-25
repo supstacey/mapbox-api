@@ -36,8 +36,8 @@ const TopValueCompanies = ({ context, runServerless }) => {
       const { companies } = companiesServerlessResponse.response;
       setTopValueCompaniesSorted(
         companies
-          .filter((company) => company.distance <= radius)
-          .sort((c1, c2) => c2.annualrevenue - c1.annualrevenue)
+            .filter((company) => company.distance <= radius) // Filter by distance
+            .sort((c1, c2) => c1.distance - c2.distance) // Sort by distance (closest first)
       );
     } else {
       setErrorMessage(companiesServerlessResponse.message);
@@ -80,7 +80,7 @@ const TopValueCompanies = ({ context, runServerless }) => {
             portalId={context.portal.id}
             companies={topValueCompaniesSorted.slice(0, companiesToDisplay)}
             propertiesToDisplay={[
-              { title: 'Annual Revenue', propertyName: 'annualrevenue' },
+              { title: 'Branch Location', propertyName: 'branch_location' },
             ]}
           />
         )}
