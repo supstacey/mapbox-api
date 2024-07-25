@@ -4,7 +4,8 @@
   "uid": "view_nearby_companies_app",
   "scopes": [
     "crm.objects.companies.write",
-    "crm.objects.companies.read"
+    "crm.objects.companies.read",
+    "crm.objects.owners.read"
   ],
   "public": false,
   "extensions": {
