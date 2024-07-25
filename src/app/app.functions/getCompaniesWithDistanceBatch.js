@@ -15,6 +15,7 @@ const PROPERTIES_TO_FETCH = [
   'phone',
   'name',
   'annualrevenue',
+  'branch_location',
 ];
 
 // Entry function of this module, it fetches batch of companies and calculates distance to the current company record
