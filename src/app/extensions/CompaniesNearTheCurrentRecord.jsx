@@ -55,7 +55,7 @@ const NearestCompanies = ({ context, runServerless, fetchProperties }) => {
   }
   return (
     <Flex direction={'column'} gap={'lg'}>
-      <Text variant="microcopy"> View the companies nearest to the currently displaying record.</Text>
+      <Text variant="microcopy"> View the 3 companies nearest to the currently displaying record.</Text>
       <CompaniesWithDistanceTable
         portalId={context.portal.id}
         companies={nearestCompaniesSorted.slice(0, companiesToDisplay)}
