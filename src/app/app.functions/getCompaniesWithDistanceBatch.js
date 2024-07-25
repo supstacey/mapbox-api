@@ -106,7 +106,7 @@ async function extendWithDistance({ coordinatesFrom, companies }) {
 }
 
 const buildFullAdress = ({ city, state, address }) => {
-  return ${city} ${state} ${address};
+  return `${city} ${state} ${address}`;
 };
 
 // Function to obtain geographic coordinates for specified address
