@@ -16,6 +16,7 @@ const PROPERTIES_TO_FETCH = [
   'name',
   'annualrevenue',
   'branch_location',
+  'hubspot_owner_id',
 ];
 
 // Entry function of this module, it fetches batch of companies and calculates distance to the current company record
