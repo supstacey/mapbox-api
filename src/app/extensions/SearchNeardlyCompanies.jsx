@@ -60,7 +60,7 @@ const TopValueCompanies = ({ context, runServerless }) => {
   return (
     <Flex direction={'column'} gap={'lg'}>
       <Text variant="microcopy">
-        Search for nearby companies by mile radius.
+        Search for up to 10 nearby companies with a certain mile radius.
       </Text>
       <Flex direction={'column'} gap={'xs'}>
         <Form>
