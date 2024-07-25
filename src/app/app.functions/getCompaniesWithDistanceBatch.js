@@ -44,7 +44,7 @@ exports.main = async (context = {}) => {
 
   const { batchSize } = context.event.payload;
   const hubspotClient = new hubspot.Client({
-    accessToken: process.env.hubspot_access_token, // Replace with your HubSpot API access token
+    accessToken: process.env.mapboxapi, // Replace with your HubSpot API access token
   });
 
   let otherCompanies = await getOtherCompaniesBatch({
