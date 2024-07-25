@@ -29,7 +29,7 @@ exports.main = async (context = {}) => {
   const { batchSize } = context.event.payload;
   let otherCompanies = await getOtherCompaniesBatch({
     hubspotClient: new hubspot.Client({
-      accessToken: process.env.hsautomation,
+      accessToken: process.env.mapboxapi,
     }),
     batchSize,
     currentCompany,
