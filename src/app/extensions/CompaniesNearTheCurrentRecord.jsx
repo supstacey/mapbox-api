@@ -62,6 +62,7 @@ const NearestCompanies = ({ context, runServerless, fetchProperties }) => {
         propertiesToDisplay={[
           { title: 'Domain', propertyName: 'domain' },
           { title: 'Phone', propertyName: 'phone' },
+          { title: 'Owner', propertyName: 'hubspot_owner_id' },
         ]}
       />
     </Flex>
