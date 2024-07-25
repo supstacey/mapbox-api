@@ -19,36 +19,20 @@ const PROPERTIES_TO_FETCH = [
   'hubspot_owner_id',
 ];
 
-// Function to fetch owner details from HubSpot
-async function getOwnerDetails(ownerIds, hubspotClient) {
-  // Fetch owner details from HubSpot
-  const ownerResponse = await hubspotClient.crm.owners.basicApi.getBatchById(ownerIds);
-
-  // Map owner IDs to owner names
-  const ownerMap = ownerResponse.results.reduce((map, owner) => {
-    map[owner.id] = owner.firstName + ' ' + owner.lastName; // Adjust based on the available fields
-    return map;
-  }, {});
-
-  return ownerMap;
-}
-
 // Entry function of this module, it fetches batch of companies and calculates distance to the current company record
 exports.main = async (context = {}) => {
   let currentCompany = await extendWithGeoCoordinates(context.propertiesToSend);
   if (!currentCompany.coordinates) {
     throw new Error(
-      'Unable to calculate geo coordinates. Please specify an address for the record.'
+      'Unable to calculate geo coordintes. Please specify an address for the record.'
     );
   }
 
   const { batchSize } = context.event.payload;
-  const hubspotClient = new hubspot.Client({
-    accessToken: process.env.mapboxapi, // Replace with your HubSpot API access token
-  });
-
   let otherCompanies = await getOtherCompaniesBatch({
-    hubspotClient,
+    hubspotClient: new hubspot.Client({
+      accessToken: process.env.mapboxapi,
+    }),
     batchSize,
     currentCompany,
   });
@@ -62,18 +46,8 @@ exports.main = async (context = {}) => {
     companies: otherCompanies.filter(({ coordinates }) => !!coordinates),
   });
 
-  // Get unique owner IDs from companies
-  const ownerIds = [...new Set(otherCompanies.map(company => company.hubspot_owner_id).filter(id => id))];
-  const ownerDetails = await getOwnerDetails(ownerIds, hubspotClient);
-
-  // Add owner names to company data
-  const companiesWithOwnerNames = otherCompanies.map(company => ({
-    ...company,
-    ownerName: ownerDetails[company.hubspot_owner_id] || 'Unknown',
-  }));
-
   return {
-    companies: companiesWithOwnerNames,
+    companies: otherCompanies,
   };
 };
 
@@ -95,18 +69,18 @@ async function getOtherCompaniesBatch({
       ...company.properties,
     }))
     .filter(
-      // Exclude current company record from list
+      // Exclude current company recored from list
       ({ hs_object_id }) => hs_object_id != currentCompany.hs_object_id
     );
 }
 
-// Function to query geo coordinates based on company address
+// Function to queery geo coordinates based on company address
 async function extendWithGeoCoordinates(company) {
   try {
     return {
       ...company,
       coordinates: await getGeoCoordinates({
-        address: buildFullAddress(company),
+        address: buildFullAdress(company),
       }),
     };
   } catch (e) {
@@ -131,16 +105,18 @@ async function extendWithDistance({ coordinatesFrom, companies }) {
   );
 }
 
-const buildFullAddress = ({ city, state, address }) => {
-  return `${city} ${state} ${address}`;
+const buildFullAdress = ({ city, state, address }) => {
+  return ${city} ${state} ${address};
 };
 
 // Function to obtain geographic coordinates for specified address
 async function getGeoCoordinates({ address }) {
   // Use Mapbox Geocoding API
+  // See https://docs.mapbox.com/api/search/geocoding/
   const mapboxClient = MapboxClient({
     accessToken: process.env.mapbox,
   });
+  // Use JS SDK for working with Mapbox APIs: https://www.npmjs.com/package/@mapbox/mapbox-sdk
   const response = await mapboxClient.forwardGeocode({ query: address }).send();
 
   return response.body.features[0].geometry.coordinates;
@@ -148,6 +124,7 @@ async function getGeoCoordinates({ address }) {
 
 // Function to calculate the distance between 2 points
 function getDistance({ coordinatesFrom, coordinatesTo }) {
+  // Use JS SDK for Turf project: https://www.npmjs.com/package/@turf/turf
   return turf.distance(turf.point(coordinatesFrom), turf.point(coordinatesTo), {
     units: 'miles',
   });
