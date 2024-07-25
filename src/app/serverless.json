@@ -1,0 +1,10 @@
+{
+  "appFunctions": {
+    "getCompaniesWithDistanceBatch": {
+      "file": "getCompaniesWithDistanceBatch.js",
+      "secrets": [
+        "MAPBOX_ACCESS_TOKEN"
+      ]
+    }
+  }
+}
