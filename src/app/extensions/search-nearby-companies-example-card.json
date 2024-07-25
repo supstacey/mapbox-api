@@ -1,7 +1,7 @@
 {
   "type": "crm-card",
   "data": {
-    "title": "Search nearby companies example card",
+    "title": "Search nearby companies",
     "uid": "search_nearby_companies_example_card",
     "location": "crm.record.tab",
     "module": {
