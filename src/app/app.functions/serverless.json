@@ -2,7 +2,7 @@
   "appFunctions": {
     "getCompaniesWithDistanceBatch": {
       "file": "getCompaniesWithDistanceBatch.js",
-      "secrets": ["hsautomation", "mapbox"]
+      "secrets": ["mapboxapi", "mapbox"]
     }
   }
 }
