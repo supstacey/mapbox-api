@@ -9,7 +9,6 @@ const turf = require('@turf/turf');
 const PROPERTIES_TO_FETCH = [
   'hs_object_id',
   'city',
-  'state',
   'address',
   'zip',
   'domain',
