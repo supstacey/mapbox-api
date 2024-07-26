@@ -24,7 +24,7 @@ const NearestCompanies = ({ context, runServerless, fetchProperties }) => {
       // Request companies batch from serverless function
       const companiesServerlessResponse = await runServerless({
         name: 'getCompaniesWithDistanceBatch',
-        propertiesToSend: ['hs_object_id', 'city', 'state', 'address'],
+        propertiesToSend: ['hs_object_id', 'city', 'address'],
         payload: { batchSize: 30 },
       });
       if (companiesServerlessResponse.status == 'SUCCESS') {
