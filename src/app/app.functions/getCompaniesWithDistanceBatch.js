@@ -11,6 +11,7 @@ const PROPERTIES_TO_FETCH = [
   'city',
   'state',
   'address',
+  'zip',
   'domain',
   'phone',
   'name',
@@ -105,8 +106,8 @@ async function extendWithDistance({ coordinatesFrom, companies }) {
   );
 }
 
-const buildFullAdress = ({ city, address }) => {
-  return `${city} ${address}`;
+const buildFullAdress = ({ address, city, zip }) => {
+  return `${address} ${city} ${zip}`;
 };
 
 // Function to obtain geographic coordinates for specified address
